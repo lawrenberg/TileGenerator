@@ -4,8 +4,8 @@ require 'Cell'
 
 WallGenerator = {}
 WallGenerator.wallSides = {'right', 'left', 'top', 'bottom'}
-WallGenerator.wallSizeInPixels = 50
-WallGenerator.maxNoOfWalls = 2
+WallGenerator.wallSizeInPixels = 140
+WallGenerator.maxNoOfWalls = 3
 WallGenerator.doorWidthInPixels = 30
 
 WallGenerator.__index = WallGenerator
