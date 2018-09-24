@@ -1,0 +1,6 @@
+require('configs.Globals')
+require('Logger.Logger')
+local seed = os.time()
+Logger:load()
+Logger:debug("Setting random seed", {seed=seed})
+math.randomseed(seed)
