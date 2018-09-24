@@ -14,12 +14,9 @@ WallGenerator.__index = WallGenerator
 @param tile Tile
 @param seed  integer
 ]]--
-function WallGenerator:generate(tile)
-  local seed = os.time()
-  tile:setWallSeed(seed)
+function WallGenerator:generate(tile, seed)
+  tile:setSeed(seed)
   self:generateWall(tile, seed)
-  seed = os.time()
-  tile:setDoorSeed(seed)
   self:generateDoor(tile, seed)
 end
 

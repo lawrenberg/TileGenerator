@@ -1,11 +1,17 @@
 require "boot.starter"
 require "Tile"
 require "Generator"
+require "TileConfigWriter"
+require "util.TimeUtil"
 
-local tile = Tile:create(675, 675, 15)
-Logger:info("Generating tile 1")
-Generator:generate("path", tile)
- Logger:debug("\n" .. tile:display(), {describeTile = tile:describe()})
---Logger:debug(tile:display())
+for i=1, 20 do
+  local tile = Tile:create(675, 675, 15)
+  TileConfigWriter:config({directory = "storage/generated_tiles/"})
+
+  Generator:generate("path", tile)
+  TileConfigWriter:write(tile)
+  Logger:debug("\n" .. tile:display(), {describeTile = tile:describe()})
+  sleep(10)
+end
 
 Logger:unload()

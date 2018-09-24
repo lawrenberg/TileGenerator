@@ -18,10 +18,8 @@ end
 ]]--
 function Generator:generate(tileType, tile)
   if tileType == 'path' then
-    PathGenerator:generate(tile, os.time())
+    local seed = os.time()
+    PathGenerator:generate(tile, seed)
   end
   
-end
-
-function Generator:generateWall()
 end

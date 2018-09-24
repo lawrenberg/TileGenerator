@@ -19,10 +19,7 @@ function Tile:create(width, height, cellSize)
     noOfDoors = 0,
     wallAreas = {},
     doorAreas = {},
-    seeds = {
-      wallSeed= 0,
-      doorSeed= 0
-    }
+    seed = 0
   }
   setmetatable(o, self)
   o.width = width
@@ -119,11 +116,10 @@ function Tile:describe()
     hasWalls=hasWalls,
     wallCount=self:getWallCount()  ,
   wallAreas = self:getWallAreas(),
-  wallSeed = self.seeds["wallSeed"]  ,
   hasDoors = hasDoors  ,
   doorCount = self:getDoorCount(),
   doorAreas = self:getDoorAreas(),
-  doorSeed = self.seeds["doorSeed"]}
+  seed = self.seed}
   
   return description
 end
@@ -188,10 +184,11 @@ function Tile:addDoorArea(area)
   self:setDoorCount(#self.doorAreas)
 end
 
-function Tile:setWallSeed(seed)
-  self.seeds["wallSeed"] = seed
+function Tile:setSeed(seed)
+  self.seed = seed
 end
 
-function Tile:setDoorSeed(seed)
-  self.seeds["doorSeed"] = seed
+function Tile:getSeed()
+  return self.seed
 end
+

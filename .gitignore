@@ -4,3 +4,5 @@
 #files
 logs/*
 !logs/.gitkeep
+storage/generated_tiles/*
+!storage/generated_tiles/.gitkeep
