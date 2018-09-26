@@ -59,7 +59,7 @@ function WallGenerator:generateWall(tile, seed)
       end
       tile:addWallArea(side)
       Logger:info("Going to generate wall", {side = side, sideIndex = idx, wallNo = i})
-      local startColumn, endingColumn, startRow, endingRow = self:calculateWallStartingPoint(tile, cell, side)
+      local startColumn, endingColumn, startRow, endingRow = self:calculateWallPoint(tile, cell, side)
       self:buildSide(tile, cell, side, startColumn, endingColumn, startRow, endingRow)
     end --end of wall loop
 end
@@ -165,7 +165,7 @@ end
 Calculate the starting point of the wall and when it ends inclusively
 @return startingColumn, endingColumn, startingRow, endingRow
 ]]--
-function WallGenerator:calculateWallStartingPoint(tile, cell, side)
+function WallGenerator:calculateWallPoint(tile, cell, side)
   local wallSize = math.ceil(self.wallSizeInPixels / tile:getCellSize())
   if side == 'top' then
     local startingColumn = 1
