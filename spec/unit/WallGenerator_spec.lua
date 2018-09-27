@@ -1,4 +1,4 @@
-require "Logger"
+require "boot.starter"
 require "Tile"
 require "Generators.WallGenerator"
 require "CellType"
@@ -9,10 +9,18 @@ describe("Test Building Bottom Wall on 300x300 tile", function()
     local wall = Cell:create(CellType.WALL)
     local startingColumn, endingColumn, startingRow, endingRow = WallGenerator:calculateWallPoint(tile, cell, "bottom")
     WallGenerator:buildSide(tile, wall, "bottom", startingColumn, endingColumn, startingRow, endingRow)
-    it("Testing calculated points", function()
-        assert.is_equal(0, startingColumn)
+    it("Testing starting Column", function() 
+        assert.is_equal(1, startingColumn)
+    end)
+
+    it("Testing ending column", function() 
         assert.is_equal(tile:getCellWidthLength(), endingColumn)
-        assert.is_equal(tile:getCellHeightLength() - 10, startingRow)
+    end)
+    it("Testing starting row", function() 
+        -- the minus 11 is so that the 10th row isn't included
+        assert.is_equal(tile:getCellHeightLength() - 9, startingRow)
+    end)
+    it("Testing ending row", function() 
         assert.is_equal(tile:getCellHeightLength(), endingRow)
     end)
 end);
