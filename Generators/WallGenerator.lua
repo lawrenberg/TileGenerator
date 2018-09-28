@@ -132,12 +132,12 @@ function WallGenerator:calculateDoorPoints(tile,cell,side)
   if side == 'top' then
     local buildStartingPoint = centerPointRow - math.floor(doorCellCount/2)
     local startingRow = 1
-    local startingColumn = buildStartingPoint
-    local endingColumn = buildStartingPoint + doorCellCount
+    local startingColumn = math.ceil(buildStartingPoint)
+    local endingColumn = math.ceil(buildStartingPoint + doorCellCount)
     local endingRow = wallSize
     return startingColumn, endingColumn, startingRow, endingRow
   elseif side == 'left' then
-    local buildStartingPoint = centerPointColumn - math.floor(doorCellCount/2)
+    local buildStartingPoint = math.ceil(centerPointColumn - math.floor(doorCellCount/2))
     local startingRow = buildStartingPoint
     local startingColumn = 1
     local endingRow = buildStartingPoint + doorCellCount
