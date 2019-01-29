@@ -4,8 +4,8 @@ require 'Cell'
 
 WallGenerator = {}
 WallGenerator.wallSides = {'right', 'left', 'top', 'bottom'}
-WallGenerator.wallSizeInPixels = 50
-WallGenerator.maxNoOfWalls = 2
+WallGenerator.wallSizeInPixels = 140
+WallGenerator.maxNoOfWalls = 3
 WallGenerator.doorWidthInPixels = 30
 
 WallGenerator.__index = WallGenerator
@@ -59,7 +59,7 @@ function WallGenerator:generateWall(tile, seed)
       end
       tile:addWallArea(side)
       Logger:info("Going to generate wall", {side = side, sideIndex = idx, wallNo = i})
-      local startColumn, endingColumn, startRow, endingRow = self:calculateWallStartingPoint(tile, cell, side)
+      local startColumn, endingColumn, startRow, endingRow = self:calculateWallPoint(tile, cell, side)
       self:buildSide(tile, cell, side, startColumn, endingColumn, startRow, endingRow)
     end --end of wall loop
 end
@@ -132,12 +132,12 @@ function WallGenerator:calculateDoorPoints(tile,cell,side)
   if side == 'top' then
     local buildStartingPoint = centerPointRow - math.floor(doorCellCount/2)
     local startingRow = 1
-    local startingColumn = buildStartingPoint
-    local endingColumn = buildStartingPoint + doorCellCount
+    local startingColumn = math.ceil(buildStartingPoint)
+    local endingColumn = math.ceil(buildStartingPoint + doorCellCount)
     local endingRow = wallSize
     return startingColumn, endingColumn, startingRow, endingRow
   elseif side == 'left' then
-    local buildStartingPoint = centerPointColumn - math.floor(doorCellCount/2)
+    local buildStartingPoint = math.ceil(centerPointColumn - math.floor(doorCellCount/2))
     local startingRow = buildStartingPoint
     local startingColumn = 1
     local endingRow = buildStartingPoint + doorCellCount
@@ -165,7 +165,7 @@ end
 Calculate the starting point of the wall and when it ends inclusively
 @return startingColumn, endingColumn, startingRow, endingRow
 ]]--
-function WallGenerator:calculateWallStartingPoint(tile, cell, side)
+function WallGenerator:calculateWallPoint(tile, cell, side)
   local wallSize = math.ceil(self.wallSizeInPixels / tile:getCellSize())
   if side == 'top' then
     local startingColumn = 1
