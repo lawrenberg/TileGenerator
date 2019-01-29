@@ -1,0 +1,9 @@
+return {
+    __all = {
+        coverage = true
+    },
+    proceduralGeneration = {
+        ROOT = {"spec/unit"},
+        pattern = "_Test"
+    }
+}
