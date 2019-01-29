@@ -25,8 +25,8 @@ function Tile:create(width, height, cellSize)
   o.width = width
   o.height = height
   o.cellSize = cellSize
-  o.cellWidthLength = width/cellSize
-  o.cellHeightLength = height / cellSize
+  o.cellWidthLength = math.ceil(width/cellSize)
+  o.cellHeightLength = math.ceil(height / cellSize)
   o:initiateGrid()
   o:refresh()
   return o
