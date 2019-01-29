@@ -1,11 +1,12 @@
 require 'Cell'
 require 'CellType'
+require 'Tile'
 
-SquareTile = {}
+PathTile = {}
 
-SquareTile.__index = SquareTile
+PathTile.__index = PathTile
 
-function SquareTile:create(width, height, cellSize)
+function PathTile:create(width, height, cellSize)
   assert(width == height, "A square requires that all sides are equal")
   local o = {
     width=0,
@@ -33,7 +34,7 @@ function SquareTile:create(width, height, cellSize)
   return o
 end
 
-function SquareTile:initiateGrid()
+function PathTile:initiateGrid()
   for i=1, self.cellHeightLength do
     self.grid[i] = {}
     for j=1,self.cellWidthLength do
@@ -42,7 +43,7 @@ function SquareTile:initiateGrid()
     end
   end
 end
-function SquareTile:refresh()
+function PathTile:refresh()
   for i=1, self.cellHeightLength do
     self.grid[i] = {}
     for j=1,self.cellWidthLength do
@@ -52,7 +53,7 @@ function SquareTile:refresh()
   end
 end
 
-function SquareTile:display()
+function PathTile:display()
     local display = ""
   for i=1, self.cellHeightLength do
     for j=1, self.cellWidthLength do
@@ -71,35 +72,35 @@ function SquareTile:display()
   return display
 end
 
-function SquareTile:getWidth()
+function PathTile:getWidth()
   return self.width
 end
 
-function SquareTile:getHeight()
+function PathTile:getHeight()
   return self.height
 end
 
-function SquareTile:getCellContent(row, column)
+function PathTile:getCellContent(row, column)
   return self.grid[row][column]
 end
 
-function SquareTile:getCellSize()
+function PathTile:getCellSize()
   return self.cellSize
 end
 
-function SquareTile:updateCell(cell, row, column)
+function PathTile:updateCell(cell, row, column)
   self.grid[row][column] = cell
 end
 
-function SquareTile:getCellHeightLength()
+function PathTile:getCellHeightLength()
   return self.cellHeightLength
 end
 
-function SquareTile:getCellWidthLength()
+function PathTile:getCellWidthLength()
   return self.cellWidthLength
 end
 
-function SquareTile:describe()
+function PathTile:describe()
   local hasWalls = "false" 
   if self:getHasWalls() then 
     hasWalls = "true" 
@@ -125,50 +126,50 @@ function SquareTile:describe()
   return description
 end
 
-function SquareTile:setHasWalls(hasWall)
+function PathTile:setHasWalls(hasWall)
   self.hasWalls = hasWall
 end
 
-function SquareTile:getHasWalls()
+function PathTile:getHasWalls()
   return self.hasWalls
 end
 
 
-function SquareTile:setWallCount(count)
+function PathTile:setWallCount(count)
   self.noOfWalls = count
 end
 
-function SquareTile:getWallCount()
+function PathTile:getWallCount()
   return self.noOfWalls
 end
 
 
-function SquareTile:setHasDoors(hasDoor)
+function PathTile:setHasDoors(hasDoor)
   self.hasDoors = hasDoor
 end
 
-function SquareTile:setDoorCount(count)
+function PathTile:setDoorCount(count)
   self.noOfDoors = count
 end
 
-function SquareTile:getDoorCount()
+function PathTile:getDoorCount()
   return self.noOfDoors
 end
 
 
-function SquareTile:getHasDoors()
+function PathTile:getHasDoors()
   return self.hasDoors
 end
 
-function SquareTile:getWallAreas()
+function PathTile:getWallAreas()
   return self.wallAreas
 end
 
-function SquareTile:getDoorAreas()
+function PathTile:getDoorAreas()
   return self.doorAreas
 end
 
-function SquareTile:addWallArea(area)
+function PathTile:addWallArea(area)
   if not self:getHasWalls() then
     self:setHasWalls(true)
   end
@@ -176,7 +177,7 @@ function SquareTile:addWallArea(area)
   self:setWallCount(#self.wallAreas)
 end
 
-function SquareTile:addDoorArea(area)
+function PathTile:addDoorArea(area)
   if not self:getHasDoors() then
     self:setHasDoors(true)
   end
@@ -185,11 +186,11 @@ function SquareTile:addDoorArea(area)
   self:setDoorCount(#self.doorAreas)
 end
 
-function SquareTile:setSeed(seed)
+function PathTile:setSeed(seed)
   self.seed = seed
 end
 
-function SquareTile:getSeed()
+function PathTile:getSeed()
   return self.seed
 end
 
